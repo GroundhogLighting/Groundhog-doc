@@ -1,0 +1,8 @@
+# The simulation manager
+
+The Simulation Manager is an important part of Groundhog, even though the user has no control over it and may work without even see it. The reason to write a tutorial about it is because some advantage may be obtained by knowing how it works.
+
+The simulation manager is the part of Groundhog that handles all the calculation requirements made by the user \(i.e. objectives, workplanes, etc\), avoiding redundant calculations. For example, if a workplane has two objectives and both require an annual daylight simulation, the simulation manager determines that and only runs one simulation. Afterwards, the results may be processed differently for providing, for example, different daylight metrics. Similarly, if the objectives on a workplane do not require an annual daylight simulation, it will not be done.
+
+Internally, the simulation manager reads Tasks. And each task has a script and some requirements that are also tasks \(similar to Make and Rake programs, for those readers who are also programmers\). When pressing "calculate", Groundhog will make a list of specific tasks \(i.e. "run an annual simulation using the Daylight Coefficient method for this workplane"\). After having a list with all the tasks, the simulation manager will expand each tasks in order to include their requirements \(i.e. "calculate the Daylight Coefficients matrix for this workplane"\). Finally, after having the whole expanded and ordered list \(i.e. all the tasks and their requirements\), the Simulation Manager will delete duplicated tasks, ending with the shortest possible list of tasks that need to be resolved. This principle allows a faster calculation and design experience.
+
